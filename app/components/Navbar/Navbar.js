@@ -4,7 +4,7 @@ import { UserButton, currentUser, auth } from '@clerk/nextjs';
 export default async function Navbar() {
   const { userId } = auth();
   const user = await currentUser();
-//   console.log(user);
+  console.log(userId);
 
   return (
     <>
