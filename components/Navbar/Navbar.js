@@ -1,8 +1,12 @@
+import UserButton from '../UserButton/UserButton';
 
 const Navbar = ({ page, setPage }) => {
 
+
   return (
-    <div>Navbar</div>
+    <>
+      <UserButton />
+    </>
   );
 };
 

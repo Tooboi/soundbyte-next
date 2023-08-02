@@ -14,5 +14,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    'tailwindcss',
+    'postcss-flexbugs-fixes',
+    'postcss-preset-env',
+    'autoprefixer',
+  ],
 }

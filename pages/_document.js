@@ -1,7 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 
-
 export default class _Document extends Document {
 
 
@@ -9,7 +8,7 @@ export default class _Document extends Document {
     return (
       <Html>
         <Head />
-        <body>
+        <body className='bg-stone-900 text-stone-200'>
           <Main />
           <NextScript />
         </body>
