@@ -11,7 +11,7 @@ export default async function Navbar() {
       <nav className="bg-stone-800 py-4 px-6 flex items-center justify-between mb-5">
         <div className="flex items-center">
           <Link href="/">
-            <div className="text-lg font-bold text-emerald-400">SoundByte</div>
+            <div className="text-lg font-bold text-brand-500">SoundByte</div>
           </Link>
         </div>
         <div className="text-stone-200 flex items-center">
@@ -26,10 +26,12 @@ export default async function Navbar() {
             </>
           )}
           { userId && (
-            <Link href='profile' className='text-stone-200 hover:text-stone-300 mr-4'>Profile</Link>
+            <Link href='profile' className='text-stone-200 hover:text-stone-300 mr-4'>{user.username || user.firstName || 'Profile'}</Link>
           )}
           <div className='ml-auto'>
-            <UserButton afterSignOutUrl='/' />
+            <UserButton afterSignOutUrl='/' 
+              userprofileMode='navigation'
+            />
           </div>
         </div>
       </nav>

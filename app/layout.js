@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
       appearance={{
         baseTheme: dark,
         variables: {
-          colorPrimary: '#10b981',
+          colorPrimary: '#f6b60d',
           colorBackground: '#292524',
-          colorTextOnPrimaryBackground: '#e7e5e4',
+          colorTextOnPrimaryBackground: '#292524',
           colorTextSecondary: '#a8a29e',
         },
       }}
