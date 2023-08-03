@@ -4,7 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 const inter = Inter({ subsets: ['latin'] });
 
-import Navbar from './components/Navbar/Navbar';
+import SideNav from './components/Navbar/SideNav';
 
 export const metadata = {
   title: 'Create Next App',
@@ -21,15 +21,16 @@ export default function RootLayout({ children }) {
           colorBackground: '#292524',
           colorTextOnPrimaryBackground: '#292524',
           colorTextSecondary: '#a8a29e',
+          colorInputText: '#292524'
         },
       }}
     >
       <html lang="en" className="bg-stone-900 text-stone-200">
         <body className={inter.className}>
-          <Navbar />
+          <SideNav />
           <main className="container">
-            <div className="flex items-start justify-center min-h-screen">
-              <div className="mt-20">{children}</div>
+            <div className="p-8 mt-14 sm:ml-64 min-h-screen">
+              <div className="">{children}</div>
             </div>
           </main>
         </body>
