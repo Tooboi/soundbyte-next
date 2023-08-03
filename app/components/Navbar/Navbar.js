@@ -18,7 +18,7 @@ export default async function Navbar() {
           {!userId && (
             <>
               <Link href="sign-in" className="text-stone-200 hover:text-stone-300 mr-4">
-                Sign In
+                Login
               </Link>
               <Link href="sign-up" className="text-stone-200 hover:text-stone-300 mr-4">
                 Sign Up
