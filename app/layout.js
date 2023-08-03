@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 const inter = Inter({ subsets: ['latin'] });
+import Script from 'next/script'
 
 import SideNav from './components/Navbar/SideNav';
 
@@ -28,11 +29,12 @@ export default function RootLayout({ children }) {
       <html lang="en" className="bg-stone-900 text-stone-200">
         <body className={inter.className}>
           <SideNav />
-          <main className="container">
-            <div className="p-8 mt-14 sm:ml-64 min-h-screen">
+          <main className="">
+            <div className="pt-24 pl-24 md:p-8 md:mt-14 md:ml-64 min-h-screen transition-all">
               <div className="">{children}</div>
             </div>
           </main>
+          <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
         </body>
       </html>
     </ClerkProvider>
