@@ -12,13 +12,15 @@ export default async function Navbar() {
       <div className="text-stone-200 flex items-center">
         {!userId && <></>}
         {userId && (
-          <Link href="profile" className="text-stone-200 hover:text-stone-300 mr-4">
-            {user.username || user.firstName || 'Profile'}
-          </Link>
+          <>
+            <Link href="profile" className="text-stone-200 hover:text-stone-300 mr-4">
+              {user.username || user.firstName || 'Profile'}
+            </Link>
+            <div className="ml-auto">
+              <Image src={user.profileImageUrl} alt={user.username} width={32} height={32} className="rounded-full" />
+            </div>
+          </>
         )}
-        <div className="ml-auto">
-          <Image src={user.profileImageUrl} alt={user.username} width={32} height={32} className='rounded-full' />
-        </div>
       </div>
     </>
   );

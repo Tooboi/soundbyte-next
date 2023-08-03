@@ -1,6 +1,6 @@
 import { RocketLaunchIcon, WrenchScrewdriverIcon, UserGroupIcon, UserIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
-import { currentUser, auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
 import React from 'react';
 
 import UserButton from '../Buttons/UserButton';
