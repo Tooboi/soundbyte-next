@@ -1,12 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/flowbite/**/*.js",
-    "./node_modules/flowbite-react/**/*.js",
-  ],
+  content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}', './node_modules/flowbite/**/*.js', './node_modules/flowbite-react/**/*.js'],
   theme: {
     extend: {
       backgroundImage: {
@@ -14,7 +8,7 @@ module.exports = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        'brand': {
+        brand: {
           100: '#fdf0cf',
           200: '#fbe29e',
           300: '#fad36e',
@@ -24,11 +18,22 @@ module.exports = {
           700: '#946d08',
           800: '#624905',
           900: '#312403',
-        }
+        },
+        byte: {
+          50: '#fbf4ef',
+          100: '#f8ebde',
+          200: '#f1d1b6',
+          300: '#ebb184',
+          400: '#e78750',
+          500: '#e9713a',
+          600: '#db4a1a',
+          700: '#b93413',
+          800: '#992b15',
+          900: '#7d2412',
+          950: '#470e05',
+        },
       },
     },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ]
+  plugins: [require('flowbite/plugin')],
 };
