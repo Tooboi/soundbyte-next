@@ -34,7 +34,6 @@ export default function RootLayout({ children }) {
               <div className="">{children}</div>
             </div>
           </main>
-          <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
         </body>
       </html>
     </ClerkProvider>
