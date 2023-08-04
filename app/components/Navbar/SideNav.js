@@ -55,7 +55,6 @@ const SideNav = () => {
           {userId && (
             <>
               <ul className="space-y-2 font-medium hidden md:block">
-              
                 <li>
                   <Link href="/discover" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition invisible md:visible group">
                     <RocketLaunchIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
@@ -127,10 +126,8 @@ const SideNav = () => {
           {userId && (
             <>
               <ul className="pt-4 mt-4 space-y-2 font-medium border-t-2 border-stone-700 dark:border-stone-700 hidden md:block">
-              <li>
-                  <Link href="/profile" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition invisible md:visible group">
-                    <UserTab />
-                  </Link>
+                <li>
+                  <UserTab />
                 </li>
                 <li>
                   <Link href="/manage" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition group">
@@ -142,7 +139,11 @@ const SideNav = () => {
                   <SignOutButton />
                 </li>
               </ul>
+
               <ul className="pt-4 mt-4 space-y-2 font-medium border-t-2 border-stone-700 dark:border-stone-700 md:hidden block">
+                <li>
+                  <UserTab />
+                </li>
                 <li>
                   <Link href="/manage" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition group">
                     <WrenchScrewdriverIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
