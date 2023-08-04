@@ -5,7 +5,6 @@ import Image from 'next/image';
 export default async function UserTab() {
   const { userId } = auth();
   const user = await currentUser();
-  console.log(user);
 
   return (
     <>
