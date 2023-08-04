@@ -24,3 +24,14 @@ export async function DELETE(request) {
     await Byte.findByIdAndDelete(id);
     return NextResponse.json({ message: "Byte Deleted" }, { status: 200 });
 }
+
+// export default async function handler(req, res) {
+//     try {
+//       await connectMongoDB();
+//       const bytes = await Byte.find();
+//       res.status(200).json({ bytes });
+//     } catch (error) {
+//       console.error("Error fetching bytes:", error);
+//       res.status(500).json({ error: "Failed to fetch bytes" });
+//     }
+//   }

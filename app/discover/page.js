@@ -1,10 +1,10 @@
-import React from 'react'
+import ByteList from "../components/Bytes/ByteList"
 
 const DiscoverPage = () => {
   return (
     <>
         <h1 className='text-2xl font-bold mb-5'>Discover</h1>
-        <p className='mb-5'>welcome to the discovery page</p>
+        <ByteList />
     </>
   )
 }
