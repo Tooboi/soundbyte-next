@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
         <body className={mulish.className}>
           <SideNav />
           <main className="">
-            <div className="pt-24 pl-24 md:p-8 md:mt-14 md:ml-64 min-h-screen transition-all">
+            <div className="pt-20 pl-20 pr-3 md:p-8 md:mt-14 md:ml-64 min-h-screen transition-all">
               <div className="">{children}</div>
             </div>
           </main>
