@@ -55,7 +55,6 @@ const SideNav = () => {
           {userId && (
             <>
               <ul className="space-y-2 font-medium hidden md:block">
-              
                 <li>
                   <Link href="/discover" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition invisible md:visible group">
                     <RocketLaunchIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
@@ -69,10 +68,11 @@ const SideNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <button type="button" class="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition">
-                    <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
+                <Link href="/upload" className="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition">
+                <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
                     <span className="ml-3 group-hover:text-stone-100 group-active:text-stone-200">Upload</span>
-                  </button>
+                </Link>
+                  {/* <button type="button" className="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition"></button> */}
                 </li>
               </ul>
               <ul className="space-y-2 font-medium md:hidden block">
@@ -87,7 +87,7 @@ const SideNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <button type="button" class="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition">
+                  <button type="button" className="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition">
                     <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
                   </button>
                 </li>
@@ -127,10 +127,8 @@ const SideNav = () => {
           {userId && (
             <>
               <ul className="pt-4 mt-4 space-y-2 font-medium border-t-2 border-stone-700 dark:border-stone-700 hidden md:block">
-              <li>
-                  <Link href="/profile" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition invisible md:visible group">
-                    <UserTab />
-                  </Link>
+                <li>
+                  <UserTab />
                 </li>
                 <li>
                   <Link href="/manage" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition group">
@@ -142,7 +140,11 @@ const SideNav = () => {
                   <SignOutButton />
                 </li>
               </ul>
+
               <ul className="pt-4 mt-4 space-y-2 font-medium border-t-2 border-stone-700 dark:border-stone-700 md:hidden block">
+                <li>
+                  <UserTab />
+                </li>
                 <li>
                   <Link href="/manage" className="flex items-center p-2 text-stone-300 rounded-lg dark:text-white hover:bg-stone-600 active:bg-stone-700 transition group">
                     <WrenchScrewdriverIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
