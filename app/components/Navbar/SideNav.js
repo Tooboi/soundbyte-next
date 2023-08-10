@@ -13,7 +13,7 @@ const SideNav = () => {
 
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full bg-stone-800/80 backdrop-blur-md border-b-2 border-stone-700">
+      <nav className="fixed top-0 z-50 w-full bg-stone-800/70 backdrop-blur-md border-b-2 border-stone-700">
         <div className="px-3 py-2 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">

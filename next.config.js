@@ -9,7 +9,7 @@ const nextConfig = {
   //   ];
   // },
   images: {
-    domains: ['images.clerk.dev'],
+    domains: ['images.clerk.dev', 'source.boringavatars.com'],
   },
 };
 
