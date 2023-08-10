@@ -2,7 +2,7 @@ import Byte from './Byte';
 
 const getBytes = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/bytes', {
+      const res = await fetch(`${process.env.MONGODB_DATA_API_URL}/api/bytes`, {
         cache: 'no-store',
       });
       if (!res.ok) {
