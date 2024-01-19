@@ -32,7 +32,7 @@ export default async function Navbar() {
                 alt="SoundByte"
                 className="mr-4 h-10 w-full"
               />
-              <h1 className="self-center whitespace-nowrap text-xl font-semibold text-stone-300 sm:text-2xl hidden sm:flex ">
+              <h1 className="self-center whitespace-nowrap text-xl font-semibold text-stone-300 sm:text-2xl hidden md:flex ">
                 SoundByte
               </h1>
             </Link>

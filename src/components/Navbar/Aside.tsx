@@ -6,9 +6,13 @@ import { Session } from "next-auth";
 
 import {
   RocketLaunchIcon,
+  HomeIcon,
+  GlobeAltIcon,
+  Cog8ToothIcon,
   ArrowRightStartOnRectangleIcon,
   RectangleStackIcon,
   WrenchScrewdriverIcon,
+  AdjustmentsHorizontalIcon,
   UserGroupIcon,
   UserIcon,
   RectangleGroupIcon,
@@ -24,68 +28,68 @@ export default function Aside({ session }: AsideProps) {
   return (
     <aside
       id="logo-sidebar"
-      className="fixed left-0 top-0 z-40 mt-14 h-screen w-[4rem] border-r-2 border-stone-700 bg-stone-900 pt-4 transition-all md:w-56"
+      className="fixed left-0 top-0 z-40 mt-14 h-screen w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 md:w-56"
       aria-label="Sidebar"
     >
       <div className="h-full overflow-y-auto bg-stone-900 px-3 pb-4">
-        <ul className="space-y-2 font-medium">
+        <ul className="flex min-h-full items-stretch flex-col font-medium">
           {user ? (
             // - Logged in
             <>
-              <li>
+              <li className="pb-2">
                 <Link
                   href="/discover"
-                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
-                  <RocketLaunchIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                  <GlobeAltIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Discover
                   </span>
                 </Link>
               </li>
-              <li>
+              <li className="pb-4">
                 <Link
                   href="/library"
-                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
-                  <RectangleGroupIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <RectangleStackIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Library
                   </span>
                 </Link>
               </li>
-              <li>
+              <li className="border-t-2 border-stone-700 pt-6">
                 <Link
                   href="/upload"
-                  className="group inline-flex w-full items-center rounded-lg border border-byte-400 bg-transparent px-2 py-2 text-center text-byte-300 transition hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none"
+                  className="group inline-flex w-full items-center rounded-lg border border-byte-400 bg-transparent px-2 py-[0.35rem] text-center text-byte-300 transition hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none"
                 >
                   <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
-                  <span className="ml-3 group-hover:text-stone-100 group-active:text-stone-200">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Upload
                   </span>
                 </Link>
-                {/* <button type="button" className="w-full px-2 py-2 text-byte-300 inline-flex items-center bg-transparent hover:bg-byte-500 border border-byte-400 hover:border-byte-500 active:border-byte-600 focus:ring-0 active:outline-none active:bg-byte-600 rounded-lg text-center group transition"></button> */}
               </li>
-              <li>
+              <li className="flex flex-1 "></li>
+              <li className="pb-2">
                 <Link
                   href="/manage"
-                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
-                  <WrenchScrewdriverIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Settings
                   </span>
                 </Link>
               </li>
-              <li>
+              <li className="mb-12">
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text group invisible flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 w-full"
                 >
                   <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Sign Out
                   </span>
                 </button>

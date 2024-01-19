@@ -28,7 +28,7 @@ export default async function RootLayout({
           <main className="m-auto min-h-screen min-w-[300px] max-w-7xl bg-stone-950 text-stone-300">
             <Navbar />
             <Aside session={session} />
-            <div className="ml-16 p-4 md:ml-56 transition-all">
+            <div className="ml-16 p-4 md:ml-56">
               <div className="mt-14 rounded-lg ">{children}</div>
             </div>
           </main>
