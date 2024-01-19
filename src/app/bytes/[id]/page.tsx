@@ -28,6 +28,7 @@ export default async function BytePage(
           ></CldImageWrapper>
             <h1>{byte.songName}</h1>
             <h1>{byte.artist}</h1>
+            <p>{byte.description}</p>
             <audio src={byte.audioFile} controls ></audio>
         </div>
     )
