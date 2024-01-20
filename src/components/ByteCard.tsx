@@ -34,7 +34,10 @@ export default function ByteCard({ byte }: ByteCardProps) {
                 {/* <PlayCircleIcon className="h-[36px] w-[36px] text-byte-500" /> */}
               </div>
               <div>
-                <p className="text-xs text-stone-400">{byte.artist}</p>
+                <Link href={"/artist/" + byte.artist}>
+                  <p className="text-xs text-stone-400 hover:text-stone-300">{byte.artist}</p>
+                </Link>
+
                 <p className="text-sm text-stone-200">{byte.songName}</p>
               </div>
             </div>

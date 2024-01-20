@@ -21,8 +21,8 @@ export default function PaginationBar({
         key={page}
         className={`btn-square join-item btn border-2 border-stone-700 bg-transparent hover:border-byte-600 hover:bg-byte-900 ${
           currentPage === page
-            ? "btn-active pointer-events-none border-2 border-byte-600"
-            : ""
+            ? "btn-active pointer-events-none border-2 border-byte-600 text-byte-500"
+            : "text-stone-300"
         }`}
       >
         {page}

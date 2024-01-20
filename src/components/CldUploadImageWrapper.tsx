@@ -1,5 +1,7 @@
 "use client";
 
+import Avatar from "boring-avatars";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 import { CldImage, CldUploadButton } from "next-cloudinary";
 import { useState } from "react";
 
@@ -14,7 +16,7 @@ type UploadResult = {
 //   onUploadSuccess: (publicId: string) => void;
 // }
 
-export default function CldUploadWrapper() {
+export default function CldUploadImageWrapper() {
   const [imageId, setImageId] = useState("");
 
   return (
@@ -30,9 +32,9 @@ export default function CldUploadWrapper() {
         }}
         // signatureEndpoint="<Endpoint (ex: /api/sign-cloudinary-params)>"
       >
-        Upload Image
+        Add Image
       </CldUploadButton>
-      {imageId && (
+      {imageId ? (
         <>
           <div className=" overflow-hidden  pb-2 pt-4">
             <CldImage
@@ -54,6 +56,10 @@ export default function CldUploadWrapper() {
             value={imageId}
           />
         </>
+      ) : (
+        <div className="mx-auto mt-2 rounded-lg border-2 border-stone-700 bg-stone-900">
+          <PhotoIcon className="h-64 w-64 text-stone-700 mx-auto" />
+        </div>
       )}
     </div>
   );
