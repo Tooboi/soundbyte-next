@@ -1,6 +1,6 @@
 "use client";
 
-import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
+import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
 type UploadResult = {
@@ -13,87 +13,94 @@ type UploadResult = {
 };
 
 function formatBytes(fileSize: number): string {
-  const sizes = ["B", "KB", "MB", "GB", "TB"];
+  const sizes = ["B", "KB", "MB"];
 
   if (fileSize === 0) return "0 B";
 
-  const i = parseInt(
-    Math.floor(Math.log(fileSize) / Math.log(1024)).toString()
-  );
-  const formattedSize = Math.round(fileSize / Math.pow(1024, i));
+  const i = Math.floor(Math.log(fileSize) / Math.log(1024));
+  const formattedSize = (fileSize / Math.pow(1024, i)).toFixed(1);
 
   return `${formattedSize} ${sizes[i]}`;
 }
 
 export default function CldUploadAudioWrapper() {
   const [original_filename, setOriginal_filename] = useState("");
-  const [publicId, setPublicId] = useState("");
+  const [secureUrl, setSecureUrl] = useState("");
   const [fileSize, setFileSize] = useState<number>(0);
+  const [buttonClassName, setButtonClassName] = useState(
+    "btn btn-block block mr-4 rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
+  );
+  // const [buttonClassName, setButtonClassName] = useState(
+  //   "btn btn-block block mr-4 rounded-lg border text-byte-300 border-byte-300 hover:bg-byte-950 active:bg-byte-900"
+  // );
+
+  const [ruleClassName, setRuleClassName] = useState(
+    "select-none pt-2 text-xs text-stone-600 lg:text-sm"
+  );
+  const [divClassName, setDivClassName] = useState("flex w-full flex-col");
 
   return (
-    <div className="flex">
-      <CldUploadButton
-        className="btn mr-4 rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950"
-        uploadPreset="soundbyte-next-audio"
-        onSuccess={(result: any) => {
-          console.log(result.info);
+    <div className="flex w-full">
+      <div className={divClassName}>
+        <CldUploadWidget
+          uploadPreset="soundbyte-next-audio"
+          options={{
+            maxVideoFileSize: 10 * 1024 * 1024, // 10 MB
+            maxFiles: 1,
+            sources: ["local", "dropbox", "google_drive"],
+            autoMinimize: true,
+          }}
+          onSuccess={(result: any) => {
+            console.log(result);
 
-          const original_filename = result.info.original_filename;
-          const publicId = result.info.public_id;
-          const fileSize = result.info.bytes;
+            const original_filename = result.info.original_filename;
+            const secureUrl = result.info.secure_url;
+            const fileSize = result.info.bytes;
 
-          setOriginal_filename(original_filename);
-          setPublicId(publicId);
-          setFileSize(fileSize);
-        }}
-      >
-        Add Audio
-      </CldUploadButton>
-      {/* <CldUploadWidget
-        uploadPreset="soundbyte-next-audio"
-        
-        onSuccess={(result: any) => {
-          console.log(result.info);
+            setOriginal_filename(original_filename);
+            setSecureUrl(secureUrl);
+            setFileSize(fileSize);
+            setButtonClassName("hidden");
+            setRuleClassName("hidden");
+            setDivClassName("flex");
+          }}
+        >
+          {({ open }) => {
+            return (
+              <button className={buttonClassName} onClick={() => open()}>
+                Add Audio
+              </button>
+            );
+          }}
+        </CldUploadWidget>
+        <div className="flex justify-between px-2">
+          <p className={ruleClassName}>Max 10 MB</p>
+          <p className={ruleClassName}>Original Audio Only</p>
+          <p className={ruleClassName}>MP3 Only</p>
+        </div>
+      </div>
 
-          const original_filename = result.info.original_filename;
-          const publicId = result.info.public_id;
-          const fileSize = result.info.bytes;
-
-          setOriginal_filename(original_filename);
-          setPublicId(publicId);
-          setFileSize(fileSize);
-        }}
-      >
-        {({ open }) => {
-          return (
-            <button
-              className="btn mr-4 rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950"
-              onClick={() => open()}
-              
-            >
-              Add Audio
-            </button>
-          );
-        }}
-      </CldUploadWidget> */}
-
-      <>
-        {original_filename ? (
-          <div className="input-disabled select-none">
-            <input
-              required
-              placeholder="Audio File"
-              className="input-disabled input mb-3 hidden w-full select-none rounded-lg border-2 border-byte-500 bg-transparent text-stone-600 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
-              name="audioFile"
-              value={publicId}
-            />
-            <h1>{original_filename}</h1>
-            <h2>{formatBytes(fileSize)}</h2>
-          </div>
-        ) : (
-          <div className="w-full rounded-lg border-2 border-byte-500"></div>
-        )}
-      </>
+      {original_filename ? (
+        <div className="flex flex-1 flex-col">
+          <input
+            required
+            placeholder="Audio File"
+            className="input-disabled input mb-3 hidden w-full select-none rounded-lg border-2 border-byte-500 bg-transparent text-stone-600 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+            name="audioFile"
+            value={secureUrl}
+          />
+          <h1 className="lg:text-md select-none pt-2 text-sm text-stone-400">
+            {original_filename}
+          </h1>
+          <h2 className="select-none pt-2 text-xs text-stone-600 lg:text-sm">
+            {formatBytes(fileSize)}
+          </h2>
+        </div>
+      ) : (
+        <>
+          {/* <div className="w-full rounded-lg border-2 border-byte-500"></div> */}
+        </>
+      )}
     </div>
   );
 }

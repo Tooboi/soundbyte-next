@@ -28,7 +28,7 @@ export default function Aside({ session }: AsideProps) {
   return (
     <aside
       id="logo-sidebar"
-      className="fixed left-0 top-0 z-40 mt-14 h-screen w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 md:w-56"
+      className="fixed left-0 top-0 z-40 mt-14 h-screen w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 md:w-56 transition-all"
       aria-label="Sidebar"
     >
       <div className="h-full overflow-y-auto bg-stone-900 px-3 pb-4">

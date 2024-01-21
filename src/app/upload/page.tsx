@@ -8,7 +8,7 @@ import CldUploadImageWrapper from "@/components/CldUploadImageWrapper";
 import CldUploadAudioWrapper from "@/components/CldUploadAudioWrapper";
 
 export const metadata = {
-  title: "Upload New Byte",
+  title: "Upload | SoundByte",
 };
 
 // - Upload function
@@ -66,14 +66,15 @@ export default async function Upload() {
   }
 
   return (
-    <div>
-      <h1 className="mx-auto mb-3 text-lg font-bold">Upload New Byte</h1>
+    <div className="w-full xl:pt-24 lg:pt-12 transition-all">
+      
 
-      <form action={uploadByte}>
+      <form action={uploadByte} className="max-w-[856px] mx-auto border-2 border-stone-700 rounded-lg p-6 bg-stone-900">
+      {/* <h1 className="text-center w-full mb-4 text-xl font-medium text-stone-400">Upload New Byte</h1> */}
         <div>
-          <div className="grid grid-cols-8 pb-4">
-            <div className="col-span-3 px-2">
-              <div className="h-full rounded-lg border-2 border-stone-700">
+          <div className="flex flex-col pb-4 xs:grid xs:grid-cols-8">
+            <div className="col-span-3 px-2 pb-4 xs:pb-0 ">
+              <div className="rounded-lg border-2 border-stone-700 bg-stone-950/50">
                 <div className="p-2">
                   <CldUploadImageWrapper />
                 </div>
@@ -84,33 +85,26 @@ export default async function Upload() {
                 required
                 name="songName"
                 placeholder="Title"
-                className="input mb-3 w-full rounded-lg border-2 border-byte-500 bg-transparent backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+                className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
               />
               <input
                 required
                 name="artist"
                 placeholder="Artist TEMP"
-                className="input mb-3 w-full rounded-lg border-2 border-byte-500 bg-transparent backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+                className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
               />
               <textarea
                 required
                 name="description"
                 placeholder="Description"
-                className="mb-3 w-full rounded-lg  border-2 border-byte-500 bg-transparent backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+                className="mb-3 w-full rounded-lg  border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
               />
               <div>
-            <CldUploadAudioWrapper />
-          </div>
-              {/* <input
-                required
-                name="audioFile"
-                placeholder="Audio File TEMP"
-                type="url"
-                className="input mb-3 w-full rounded-lg border-2 border-byte-500 bg-transparent backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
-              /> */}
+                <CldUploadAudioWrapper />
+              </div>
             </div>
           </div>
-          
+
           <FormSubmitButton className="text-byte-200">Upload</FormSubmitButton>
         </div>
       </form>

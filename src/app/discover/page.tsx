@@ -6,6 +6,10 @@ interface HomeProps {
   searchParams: { page: string };
 }
 
+export const metadata = {
+  title: "Discover | SoundByte",
+};
+
 export default async function Discover({
   searchParams: { page = "1" },
 }: HomeProps) {
@@ -26,7 +30,7 @@ export default async function Discover({
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-w-4xl mx-auto">
       {bytes.map((byte) => (
         <ByteCard byte={byte} key={byte.id} />
       ))}

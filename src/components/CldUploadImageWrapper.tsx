@@ -2,7 +2,7 @@
 
 import Avatar from "boring-avatars";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import { CldImage, CldUploadButton } from "next-cloudinary";
+import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
 
 type UploadResult = {
@@ -12,31 +12,47 @@ type UploadResult = {
   event: "success";
 };
 
-// interface CldUploadWrapperProps {
-//   onUploadSuccess: (publicId: string) => void;
-// }
-
 export default function CldUploadImageWrapper() {
   const [imageId, setImageId] = useState("");
+  const [buttonClassName, setButtonClassName] = useState(
+    "btn-block btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
+  );
 
   return (
-    <div className="">
-      <CldUploadButton
-        className="btn-block btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950"
+    <div className="h-full">
+      <CldUploadWidget
         uploadPreset="soundbyte-next"
+        options={{
+          maxImageFileSize: 5 * 1024 * 1024, // 5 MB
+          maxFiles: 1,
+          sources: [
+            "local",
+            "dropbox",
+            "google_drive",
+            "instagram",
+            "unsplash",
+          ],
+          autoMinimize: true,
+        }}
         onSuccess={(result: any) => {
           const publicId = result.info.public_id;
-          console.log("publicId: " + publicId);
-
           setImageId(publicId);
+          setButtonClassName("hidden");
         }}
         // signatureEndpoint="<Endpoint (ex: /api/sign-cloudinary-params)>"
       >
-        Add Image
-      </CldUploadButton>
+        {({ open }) => {
+          return (
+            <button className={buttonClassName} onClick={() => open()}>
+              Add Image
+            </button>
+          );
+        }}
+      </CldUploadWidget>
+
       {imageId ? (
-        <>
-          <div className=" overflow-hidden  pb-2 pt-4">
+        <div className="h-full ">
+          <div className=" overflow-hidden">
             <CldImage
               alt="Thumbnail"
               src={imageId}
@@ -55,10 +71,13 @@ export default function CldUploadImageWrapper() {
             name="publicId"
             value={imageId}
           />
-        </>
+        </div>
       ) : (
-        <div className="mx-auto mt-2 rounded-lg border-2 border-stone-700 bg-stone-900">
-          <PhotoIcon className="h-64 w-64 text-stone-700 mx-auto" />
+        <div className="mx-auto mt-2 max-w-[256px] rounded-lg border border-byte-600 bg-byte-950">
+          <PhotoIcon className="mx-auto w-full text-byte-800/80" />
+          <p className="mt-[-1rem] select-none pb-2 text-center text-xs text-byte-800/80 lg:text-sm">
+            Max 5 MB
+          </p>
         </div>
       )}
     </div>
