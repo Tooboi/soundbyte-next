@@ -8,6 +8,10 @@ interface BytePageProps {
     }
 }
 
+export const metadata = {
+    title: "Discover | SoundByte",
+  };
+
 export default async function BytePage(
     {params: {id}} : BytePageProps
 ) {

@@ -14,14 +14,14 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
 
   return (
     // <div className="dropdown-end dropdown">
-    <label tabIndex={0} className="">
+    <label tabIndex={0} className="min-h-10 min-w-10 h-full">
       {user?.image ? (
         <Image
           src={user?.image}
           alt="Profile picture"
           width={40}
           height={40}
-          className="w-10 rounded-full"
+          className="min-h-10 min-w-10 rounded-full"
         />
       ) : (
         <Avatar

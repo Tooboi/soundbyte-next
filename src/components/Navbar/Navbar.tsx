@@ -23,32 +23,32 @@ export default async function Navbar() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b-2 border-stone-700 bg-stone-800/70 backdrop-blur-md">
       <div className="px-3 py-2 lg:px-5 lg:pl-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center justify-start rtl:justify-end flex-1">
-            <Link href="/" className="ms-2 flex md:me-24">
+        <div className="flex items-center justify-stretch">
+          <div className="flex flex-1 items-center justify-start rtl:justify-end">
+            <Link href="/" className="ms-2 flex flex-none md:me-24">
               <Image
                 priority
                 src={LogoOrange}
                 alt="SoundByte"
                 className="mr-4 h-10 w-full"
               />
-              <h1 className="self-center whitespace-nowrap text-xl font-semibold text-stone-300 sm:text-2xl hidden md:flex ">
+              <h1 className="hidden self-center whitespace-nowrap text-xl font-semibold text-stone-300 sm:text-2xl md:flex ">
                 SoundByte
               </h1>
             </Link>
           </div>
-            <form action={searchProducts}>
-              <div className="form-control mr-8">
-                <input
-                  name="searchQuery"
-                  placeholder="Search"
-                  className="input justify-end h-[2.5rem] w-full max-w-full border-2 border-stone-700 bg-transparent placeholder-stone-500 backdrop-blur-sm "
-                />
-              </div>
-            </form>
-            {/* <UserMenuButton session={session} /> */}
-          
-          <UserMenuButton session={session} />
+          <form action={searchProducts} className="flex w-full justify-end">
+            <div className="form-control">
+              <input
+                name="searchQuery"
+                placeholder="Search"
+                className="input h-[2.5rem] w-[200px] border-2 border-stone-700 bg-transparent placeholder-stone-500 backdrop-blur-sm sm:w-full "
+              />
+            </div>
+          </form>
+          <div className="pl-4  h-full min-h-10">
+            <UserMenuButton session={session} />
+          </div>
         </div>
       </div>
     </nav>
