@@ -101,11 +101,11 @@ export default function Aside({ session }: AsideProps) {
               <li>
                 <Link
                   href="/discover"
-                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
                   <RocketLaunchIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Discover
                   </span>
                 </Link>
@@ -113,11 +113,11 @@ export default function Aside({ session }: AsideProps) {
               <li>
                 <button
                   onClick={() => signIn()}
-                  className="text group invisible flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 "
                 >
-                  <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                  <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500 " />
 
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Sign In
                   </span>
                 </button>
