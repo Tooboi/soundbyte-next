@@ -5,6 +5,9 @@ import { PrismaClient } from "@prisma/client";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
+// import GitHubProvider from "next-auth/providers/github";
+// import EmailProvider from "next-auth/providers/email";
+// import InstagramProvider from "next-auth/providers/instagram";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma as PrismaClient) as Adapter,
@@ -13,7 +16,39 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
+    // GitHubProvider({
+    //   clientId: process.env.GITHUB_ID,
+    //   clientSecret: process.env.GITHUB_SECRET
+    // })
+    // EmailProvider({
+    //   server: {
+    //     host: process.env.EMAIL_SERVER_HOST,
+    //     port: process.env.EMAIL_SERVER_PORT,
+    //     auth: {
+    //       user: process.env.EMAIL_SERVER_USER,
+    //       pass: process.env.EMAIL_SERVER_PASSWORD
+    //     }
+    //   },
+    //   from: process.env.EMAIL_FROM
+    // }),
+    // InstagramProvider({
+    //   clientId: process.env.INSTAGRAM_CLIENT_ID,
+    //   clientSecret: process.env.INSTAGRAM_CLIENT_SECRET
+    // })
   ],
+  theme: {
+    colorScheme: "dark", // "auto" | "dark" | "light"
+    brandColor: "#de5617", // Hex color code
+    logo: "https://res.cloudinary.com/dlvmcylti/image/upload/v1705878970/LogoOrange_d2tr0a.svg", // Absolute URL to image
+    buttonText: "#de5617" // Hex color code
+  },
+  pages: {
+    signIn: '/auth/signin',
+    // signOut: '/signout',
+    error: '/error', // Error code passed in query string as ?error=
+    verifyRequest: '/auth/verify-request', // (used for check email message)
+    newUser: '/signup' // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
 };
 
 const handler = NextAuth(authOptions);
