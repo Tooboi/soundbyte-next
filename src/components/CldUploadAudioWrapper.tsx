@@ -20,7 +20,12 @@ function formatBytes(fileSize: number): string {
   const i = Math.floor(Math.log(fileSize) / Math.log(1024));
   const formattedSize = (fileSize / Math.pow(1024, i)).toFixed(1);
 
-  return `${formattedSize} ${sizes[i]}`;
+  // Check if the decimal part is .0, and remove it in that case
+  const formattedSizeWithoutDecimal = formattedSize.endsWith('.0')
+    ? formattedSize.split('.')[0]
+    : formattedSize;
+
+  return `${formattedSizeWithoutDecimal} ${sizes[i]}`;
 }
 
 export default function CldUploadAudioWrapper() {
@@ -38,6 +43,7 @@ export default function CldUploadAudioWrapper() {
     "select-none pt-2 text-xs text-stone-600 lg:text-sm"
   );
   const [divClassName, setDivClassName] = useState("flex w-full flex-col");
+  const maxFileSize = 26250000; // 25MB in B
 
   return (
     <div className="flex w-full">
@@ -45,7 +51,7 @@ export default function CldUploadAudioWrapper() {
         <CldUploadWidget
           uploadPreset="soundbyte-next-audio"
           options={{
-            maxVideoFileSize: 10 * 1024 * 1024, // 10 MB
+            maxVideoFileSize: maxFileSize,
             maxFiles: 1,
             sources: ["local", "dropbox", "google_drive"],
             autoMinimize: true,
@@ -74,7 +80,7 @@ export default function CldUploadAudioWrapper() {
           }}
         </CldUploadWidget>
         <div className="flex justify-between px-2">
-          <p className={ruleClassName}>Max 10 MB</p>
+          <p className={ruleClassName}>Max {formatBytes(maxFileSize)}</p>
           <p className={ruleClassName}>Original Audio Only</p>
           <p className={ruleClassName}>MP3 Only</p>
         </div>
