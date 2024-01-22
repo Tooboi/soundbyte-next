@@ -28,10 +28,10 @@ export default function Aside({ session }: AsideProps) {
   return (
     <aside
       id="logo-sidebar"
-      className="fixed left-0 top-0 z-40 mt-14 h-screen w-12 xs:w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 transition-all md:w-56"
+      className="fixed left-0 top-0 z-40 mt-14 h-screen w-12 border-r-2 border-stone-700 bg-stone-900 pt-4 transition-all xs:w-16 md:w-56"
       aria-label="Sidebar"
     >
-      <div className="h-full overflow-y-auto bg-stone-900 px-1 xs:px-3 pb-4">
+      <div className="h-full overflow-y-auto bg-stone-900 px-1 pb-4 xs:px-3">
         <ul className="flex min-h-full flex-col items-stretch font-medium">
           {user ? (
             // - Logged in
@@ -62,7 +62,7 @@ export default function Aside({ session }: AsideProps) {
               <li className="border-t-2 border-stone-700 pt-6">
                 <Link
                   href="/upload"
-                  className="group inline-flex w-full items-center rounded-lg xs:border border-byte-400 bg-transparent px-2 xs:py-[0.35rem] text-center text-byte-300 transition-all hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none"
+                  className="group inline-flex w-full items-center rounded-lg border-byte-400 bg-transparent px-2 text-center text-byte-300 transition-all hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none xs:border xs:py-[0.35rem]"
                 >
                   <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
                   <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
@@ -71,7 +71,7 @@ export default function Aside({ session }: AsideProps) {
                 </Link>
               </li>
               <li className="flex flex-1 "></li>
-              <li className="pb-2">
+              {/* <li className="pb-2">
                 <Link
                   href="/manage"
                   className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
@@ -93,7 +93,7 @@ export default function Aside({ session }: AsideProps) {
                     Sign Out
                   </span>
                 </button>
-              </li>
+              </li> */}
             </>
           ) : (
             // - logged out

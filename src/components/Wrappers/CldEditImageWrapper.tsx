@@ -7,11 +7,8 @@ import { useState } from "react";
 import UserMenuButton from "../Navbar/UserMenuButton";
 import CldImageWrapper from "./CldImageWrapper";
 
-type UploadResult = {
-  info: {
-    public_id: string;
-  };
-  event: "success";
+type CldUploadImageWrapperProps = {
+  session: any; // Use 'any' type as a workaround
 };
 
 function formatBytes(fileSize: number): string {
@@ -30,10 +27,10 @@ function formatBytes(fileSize: number): string {
   return `${formattedSizeWithoutDecimal} ${sizes[i]}`;
 }
 
-export default function CldUploadImageWrapper() {
-  const [profilePic, setProfilePic] = useState("");
+export default function CldUploadImageWrapper({ session }: CldUploadImageWrapperProps) {
+  const [profilePic, setProfilePic] = useState(session.user.profilePic || "");
   const [buttonClassName, setButtonClassName] = useState(
-    "btn-block btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
+    "btn-block mb-2 btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
   );
   const maxFileSize = 10485760; // 25MB in B
 
@@ -69,7 +66,7 @@ export default function CldUploadImageWrapper() {
         }}
       </CldUploadWidget>
 
-      {profilePic ? (
+      {profilePic !== "" ? (
         <div className="h-full ">
           <div className=" overflow-hidden">
             <CldImageWrapper
@@ -92,12 +89,11 @@ export default function CldUploadImageWrapper() {
           />
         </div>
       ) : (
-        <div className="mx-auto mt-2 max-w-[256px] rounded-lg border border-byte-600 bg-byte-950">
-          {/* <PhotoIcon className="mx-auto w-full text-byte-800/80" />
+        <div className="mx-auto max-w-[256px] rounded-lg border border-byte-600 bg-byte-950">
+          <PhotoIcon className="mx-auto w-full text-byte-800/80" />
           <p className="mt-[-1rem] select-none pb-2 text-center text-xs text-byte-800/80 lg:text-sm">
             Max {formatBytes(maxFileSize)}
-          </p> */}
-          {/* <UserMenuButton session={session} /> */}
+          </p>
         </div>
       )}
     </div>
