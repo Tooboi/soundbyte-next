@@ -1,7 +1,7 @@
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import GoogleSignInWrapper from "@/components/GoogleSignInWrapper";
+import GoogleSignInWrapper from "@/components/Wrappers/GoogleSignInWrapper";
 import { redirect } from "next/navigation";
 
 export default async function SignIn() {
@@ -22,11 +22,11 @@ export default async function SignIn() {
               </div>
             </div>
             <div className="col-span-5 px-2">
-              <input
+              {/* <input
                 name="email"
                 placeholder="Email [TEMP]"
                 className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
-              />
+              /> */}
               <div>
                 <GoogleSignInWrapper />
               </div>

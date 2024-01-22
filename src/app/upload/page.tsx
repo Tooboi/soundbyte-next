@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
-import CldUploadImageWrapper from "@/components/CldUploadImageWrapper";
-import CldUploadAudioWrapper from "@/components/CldUploadAudioWrapper";
+import CldUploadImageWrapper from "@/components/Wrappers/CldUploadImageWrapper";
+import CldUploadAudioWrapper from "@/components/Wrappers/CldUploadAudioWrapper";
 
 export const metadata = {
   title: "Upload | SoundByte",
@@ -67,8 +67,6 @@ export default async function Upload() {
 
   return (
     <div className="w-full xl:pt-24 lg:pt-12 transition-all">
-      
-
       <form action={uploadByte} className="max-w-[856px] mx-auto border-2 border-stone-700 rounded-lg p-6 bg-stone-900">
       {/* <h1 className="text-center w-full mb-4 text-xl font-medium text-stone-400">Upload New Byte</h1> */}
         <div>

@@ -1,7 +1,7 @@
 import { Byte } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
-import CldImageWrapper from "@/components/CldImageWrapper";
+import CldImageWrapper from "@/components/Wrappers/CldImageWrapper";
 
 interface ByteCardProps {
   byte: Byte;
