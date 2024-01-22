@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/db/prisma"
 import { notFound } from "next/navigation"
-import CldImageWrapper from "@/components/CldImageWrapper";
+import CldImageWrapper from "@/components/Wrappers/CldImageWrapper";
 
 interface BytePageProps {
     params: {
