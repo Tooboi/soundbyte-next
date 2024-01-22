@@ -28,11 +28,11 @@ export default function Aside({ session }: AsideProps) {
   return (
     <aside
       id="logo-sidebar"
-      className="fixed left-0 top-0 z-40 mt-14 h-screen w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 md:w-56 transition-all"
+      className="fixed left-0 top-0 z-40 mt-14 h-screen w-16 border-r-2 border-stone-700 bg-stone-900 pt-4 transition-all md:w-56"
       aria-label="Sidebar"
     >
       <div className="h-full overflow-y-auto bg-stone-900 px-3 pb-4">
-        <ul className="flex min-h-full items-stretch flex-col font-medium">
+        <ul className="flex min-h-full flex-col items-stretch font-medium">
           {user ? (
             // - Logged in
             <>
@@ -85,7 +85,7 @@ export default function Aside({ session }: AsideProps) {
               <li className="mb-12">
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 w-full"
+                  className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
                   <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
@@ -101,11 +101,11 @@ export default function Aside({ session }: AsideProps) {
               <li>
                 <Link
                   href="/discover"
-                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
                 >
                   <RocketLaunchIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                  <span className="ml-3 group-hover:text-stone-200 ">
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                     Discover
                   </span>
                 </Link>
@@ -113,14 +113,33 @@ export default function Aside({ session }: AsideProps) {
               <li>
                 <button
                   onClick={() => signIn()}
-                  className="text group invisible flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
+                  className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 "
+                >
+                  <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500 " />
+
+                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
+                    Sign In
+                  </span>
+                </button>
+                {/* <Link
+                  href="/auth/signin"
+                  className="text group invisible flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 md:visible"
                 >
                   <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
                   <span className="ml-3 group-hover:text-stone-200 ">
                     Sign In
                   </span>
-                </button>
+                </Link> */}
+                {/* <>
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}>
+          <button onClick={() => signIn(provider.id)}>
+            Sign in with {provider.name}
+          </button>
+        </div>
+      ))}
+    </> */}
               </li>
             </>
           )}
