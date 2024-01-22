@@ -21,8 +21,8 @@ function formatBytes(fileSize: number): string {
   const formattedSize = (fileSize / Math.pow(1024, i)).toFixed(1);
 
   // Check if the decimal part is .0, and remove it in that case
-  const formattedSizeWithoutDecimal = formattedSize.endsWith('.0')
-    ? formattedSize.split('.')[0]
+  const formattedSizeWithoutDecimal = formattedSize.endsWith(".0")
+    ? formattedSize.split(".")[0]
     : formattedSize;
 
   return `${formattedSizeWithoutDecimal} ${sizes[i]}`;
@@ -79,10 +79,9 @@ export default function CldUploadAudioWrapper() {
             );
           }}
         </CldUploadWidget>
-        <div className="flex justify-between px-2">
+        <div className="flex justify-between px-0 md:px-2">
           <p className={ruleClassName}>Max {formatBytes(maxFileSize)}</p>
-          <p className={ruleClassName}>Original Audio Only</p>
-          <p className={ruleClassName}>MP3 Only</p>
+          <p className={ruleClassName}>MP3 - FLAC - WAV</p>
         </div>
       </div>
 

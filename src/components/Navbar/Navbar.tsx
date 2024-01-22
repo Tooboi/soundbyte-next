@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-import LogoOrange from "@/assets/LogoOrange.svg";
+import LogoOrange from "@/components/SVG/LogoOrange";
 
 async function searchProducts(formData: FormData) {
   "use server";
@@ -26,12 +25,9 @@ export default async function Navbar() {
         <div className="flex items-center justify-stretch">
           <div className="flex flex-1 items-center justify-start rtl:justify-end">
             <Link href="/" className="ms-2 flex flex-none md:me-24">
-              <Image
-                priority
-                src={LogoOrange}
-                alt="SoundByte"
-                className="mr-4 h-10 w-full"
-              />
+              <div className="mr-4 h-10 w-full">
+                <LogoOrange />
+              </div>
               <h1 className="hidden self-center whitespace-nowrap text-xl font-semibold text-stone-300 sm:text-2xl md:flex ">
                 SoundByte
               </h1>
@@ -46,7 +42,7 @@ export default async function Navbar() {
               />
             </div>
           </form>
-          <div className="pl-4  h-full min-h-10">
+          <div className="min-h-10  h-full pl-4">
             <UserMenuButton session={session} />
           </div>
         </div>

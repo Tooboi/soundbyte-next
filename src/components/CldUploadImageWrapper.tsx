@@ -1,6 +1,5 @@
 "use client";
 
-import Avatar from "boring-avatars";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
@@ -12,18 +11,35 @@ type UploadResult = {
   event: "success";
 };
 
+function formatBytes(fileSize: number): string {
+  const sizes = ["B", "KB", "MB"];
+
+  if (fileSize === 0) return "0 B";
+
+  const i = Math.floor(Math.log(fileSize) / Math.log(1024));
+  const formattedSize = (fileSize / Math.pow(1024, i)).toFixed(1);
+
+  // Check if the decimal part is .0, and remove it in that case
+  const formattedSizeWithoutDecimal = formattedSize.endsWith(".0")
+    ? formattedSize.split(".")[0]
+    : formattedSize;
+
+  return `${formattedSizeWithoutDecimal} ${sizes[i]}`;
+}
+
 export default function CldUploadImageWrapper() {
   const [imageId, setImageId] = useState("");
   const [buttonClassName, setButtonClassName] = useState(
     "btn-block btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
   );
+  const maxFileSize = 10485760; // 25MB in B
 
   return (
     <div className="h-full">
       <CldUploadWidget
         uploadPreset="soundbyte-next"
         options={{
-          maxImageFileSize: 5 * 1024 * 1024, // 5 MB
+          maxImageFileSize: maxFileSize,
           maxFiles: 1,
           sources: [
             "local",
@@ -76,7 +92,7 @@ export default function CldUploadImageWrapper() {
         <div className="mx-auto mt-2 max-w-[256px] rounded-lg border border-byte-600 bg-byte-950">
           <PhotoIcon className="mx-auto w-full text-byte-800/80" />
           <p className="mt-[-1rem] select-none pb-2 text-center text-xs text-byte-800/80 lg:text-sm">
-            Max 5 MB
+            Max {formatBytes(maxFileSize)}
           </p>
         </div>
       )}
