@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import LogoOrange from "@/assets/LogoOrange.svg";
+import LogoOrange from "@/components/SVG/LogoOrange";
 
 
 export default function Footer() {
@@ -11,12 +11,7 @@ export default function Footer() {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="/" className="flex items-center">
-              <Image
-                priority
-                src={LogoOrange}
-                alt="SoundByte"
-                className="mr-4 h-10 w-full"
-              />
+              <div className="mr-4 h-10 w-full"><LogoOrange /></div>
                 <span className="self-center whitespace-nowrap text-2xl font-semibold text-byte-500">
                   SoundByte
                 </span>
