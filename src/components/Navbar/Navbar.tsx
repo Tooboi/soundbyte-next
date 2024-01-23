@@ -20,8 +20,8 @@ export default async function Navbar() {
   const session = await getServerSession(authOptions);
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b-2 border-stone-700 bg-stone-900 h-15">
-      <div className="px-3 py-2 lg:px-5 lg:pl-3">
+    <nav className="h-15 fixed top-0 z-50 w-full border-b-2 border-stone-700 bg-stone-900">
+      <div className="py-2 md:pl-1 lg:pr-1">
         <div className="flex items-center justify-between">
           <div className="flex flex-1 justify-start rtl:justify-end">
             <Link href="/" className="ms-2 flex flex-none md:me-24">
@@ -42,7 +42,7 @@ export default async function Navbar() {
               />
             </div>
           </form>
-          <div className=" flex-0 w-14">
+          <div className=" grid w-14 content-center ">
             <UserMenuButton session={session} />
           </div>
         </div>

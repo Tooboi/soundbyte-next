@@ -103,7 +103,7 @@ export default async function Upload() {
             </div>
           </div>
 
-          <FormSubmitButton className="text-byte-200">Upload</FormSubmitButton>
+          <FormSubmitButton className="text-byte-200 w-full btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:border-byte-400 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 active:text-byte-400">Upload</FormSubmitButton>
         </div>
       </form>
     </div>
