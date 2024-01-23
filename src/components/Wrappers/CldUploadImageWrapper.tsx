@@ -3,6 +3,7 @@
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
+import CldImageWrapper from "./CldImageWrapper";
 
 type UploadResult = {
   info: {
@@ -69,7 +70,7 @@ export default function CldUploadImageWrapper() {
       {imageId ? (
         <div className="h-full ">
           <div className=" overflow-hidden">
-            <CldImage
+            <CldImageWrapper
               alt="Thumbnail"
               src={imageId}
               width="256"
