@@ -35,11 +35,28 @@ async function saveProfile(formData: FormData) {
     where: { email: userEmail },
   });
 
+  // - Check if the form inputs have changed
+  const shouldUpdate = (field: string, value: string | undefined) => {
+    // Check if the value is not undefined and not an empty string
+    return (
+      value !== undefined &&
+      value.trim() !== "" &&
+      value !== (user as any)[field]
+    );
+  };
+
   // - Update user information in the database
   const updatedUser = await prisma.user.update({
     where: { id: user?.id },
-    data: { name, username: userName, profilePic },
+    data: {
+      name: shouldUpdate("name", name) ? name : undefined,
+      username: shouldUpdate("username", userName) ? userName : undefined,
+      profilePic: shouldUpdate("profilePic", profilePic)
+        ? profilePic
+        : undefined,
+    },
   });
+  redirect("/manage");
 }
 
 export default async function ManageEditPage() {
@@ -56,23 +73,10 @@ export default async function ManageEditPage() {
   const userName = session.user.username || "";
   const name = session.user.name || "";
 
-  const handleFormSubmit = async (event: any) => {
-    event.preventDefault();
-    
-    const form = event.target;
-    const formData = new FormData(form);
-
-    // Call the saveProfile function to update user information
-    await saveProfile(formData);
-
-    // Optionally, you can redirect the user to another page after the update
-    redirect("/manage");
-  };
-
   return (
     <div>
       <form
-      onSubmit={handleFormSubmit}
+        action={saveProfile}
         className="mx-auto max-w-[856px] rounded-lg border-2 border-stone-700 bg-stone-900 p-6"
       >
         <h1 className="mb-4 w-full text-center text-xl font-medium text-stone-400">
@@ -92,7 +96,6 @@ export default async function ManageEditPage() {
             </label>
             <input
               id="name"
-              required
               name="name"
               placeholder={name}
               className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
@@ -101,7 +104,6 @@ export default async function ManageEditPage() {
               Username
             </label>
             <input
-              required
               id="username"
               name="username"
               placeholder={userName || "Add username"}

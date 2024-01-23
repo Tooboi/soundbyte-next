@@ -30,6 +30,8 @@ export default async function ManagePage({ params: { id } }: ManagePageProps) {
   const profilePic = session.user.profilePic || "";
   const userName = session.user.username || "";
   const name = session.user.name || "";
+  console.log(session.user);
+  
 
   return (
     <div className="w-full transition-all lg:pt-12 xl:pt-24">
@@ -62,7 +64,7 @@ export default async function ManagePage({ params: { id } }: ManagePageProps) {
             </div>
           )}
         </div>
-        <h1 className="text-center text-lg">{userEmail}</h1>
+        <h1 className="text-center text-lg text-stone-400">{userEmail}</h1>
         <Link
           href="/manage/edit"
           className="group btn-sm btn absolute right-2 top-2 border-stone-500 bg-stone-800 hover:border-stone-400 hover:bg-stone-700"
