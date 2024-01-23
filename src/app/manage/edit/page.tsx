@@ -13,7 +13,7 @@ export const metadata = {
   title: "Edit Profile | SoundByte",
 };
 
-async function saveProfile(formData: FormData) {
+async function ValidateUsername(formData: FormData) {
   "use server";
 
   // - Protect against non logged in user access
@@ -23,7 +23,39 @@ async function saveProfile(formData: FormData) {
     redirect("/api/auth/signin?callbackUrl=/upload");
   }
 
-  // - Get updated user info from form
+  // - Get updated user info from form and session
+  const userEmail = session.user.email || undefined;
+  const userName = formData.get("username")?.toString();
+  const user = await prisma.user.findUnique({
+    where: { email: userEmail },
+  });
+
+  const existingUser = await prisma.user.findFirst({
+    // Exclude the current user and find first record with matching username
+    where: { username: userName, id: { not: user?.id } },
+  });
+  return existingUser === null;
+}
+
+async function saveProfile(formData: FormData) {
+  "use server";
+
+  // Validate the username
+  const isUsernameValid = await ValidateUsername(formData);
+
+  if (!isUsernameValid) {
+    console.log("Username is not valid. Aborting save.");
+    return; // Do not proceed with the save if the username is not valid
+  }
+
+  // - Protect against non logged in user access
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/upload");
+  }
+
+  // - Get updated user info from form and session
   const userEmail = session.user.email || undefined;
   const profilePic = formData.get("profilePic")?.toString();
   const userName = formData.get("username")?.toString();
