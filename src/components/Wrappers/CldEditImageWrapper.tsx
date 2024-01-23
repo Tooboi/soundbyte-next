@@ -27,13 +27,14 @@ function formatBytes(fileSize: number): string {
   return `${formattedSizeWithoutDecimal} ${sizes[i]}`;
 }
 
-export default function CldEditImageWrapper({ session }: CldEditImageWrapperProps) {
-  const [profilePic, setProfilePic] = useState(session.user.profilePic || "");
+export default function CldEditImageWrapper({
+  session,
+}: CldEditImageWrapperProps) {
+  const [profilePic, setProfilePic] = useState(session.user.profilePic);
   const [buttonClassName, setButtonClassName] = useState(
     "btn-block mb-2 btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 hover:border-byte-400 active:text-byte-400 text-byte-200"
   );
   const maxFileSize = 10485760; // * 25MB in B
-  
 
   return (
     <div className="h-full">
@@ -51,7 +52,7 @@ export default function CldEditImageWrapper({ session }: CldEditImageWrapperProp
           ],
           autoMinimize: true,
         }}
-        onSuccess={(result: any) => {
+        onSuccess={(result: any) => {          
           const publicId = result.info.public_id;
           setProfilePic(publicId);
           setButtonClassName("hidden");
@@ -60,8 +61,14 @@ export default function CldEditImageWrapper({ session }: CldEditImageWrapperProp
       >
         {({ open }) => {
           return (
-            <button className={buttonClassName} onClick={() => open()}>
-              Change profile pic
+            <button
+              className={buttonClassName}
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default form submission
+                open();
+              }}
+            >
+              Change Image
             </button>
           );
         }}
@@ -82,10 +89,10 @@ export default function CldEditImageWrapper({ session }: CldEditImageWrapperProp
             />
           </div>
           <input
-            required
             placeholder={profilePic}
+            id="profilePic"
             className="input-disabled input mb-3 hidden w-full rounded-lg border-2 border-byte-500 bg-transparent text-stone-600 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
-            name="publicId"
+            name="profilePic"
             value={profilePic}
           />
         </div>

@@ -31,7 +31,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
   const email = session?.user.email || null;
 
   return (
-    <div className="dropdown-end dropdown">
+    <div className="dropdown-end dropdown drop-shadow-lg">
       <div className="group" role="button" tabIndex={0}>
         {profilePic !== null ? (
           <CldImageWrapper
@@ -39,16 +39,16 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
             alt="profilePic"
             sizes="100vw"
             aspectRatio="1:1"
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             crop="fill"
             tabIndex={0}
-            className="h-full overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100"
+            className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100"
           />
         ) : (
-          <div className="h-full overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100">
+          <div className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100">
             <Avatar
-              size={36}
+              size={40}
               name={email || "soundbyte"}
               variant="beam"
               colors={["#eb7633", "#de5617", "#7b2718", "#602216", "#9c3116"]}
@@ -58,7 +58,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-b-lg menu-sm z-30 mt-2 w-52 border-2 border-stone-700 bg-stone-900 p-2 shadow"
+        className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow"
       >
         {session ? (
           <>
@@ -68,7 +68,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
                 className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
               >
                 <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
+                <span className="ml-3 group-hover:text-stone-200 flex">
                   Settings
                 </span>
               </Link>
@@ -80,7 +80,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
               >
                 <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
+                <span className="ml-3 group-hover:text-stone-200 flex">
                   Sign Out
                 </span>
               </button>

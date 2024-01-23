@@ -57,8 +57,6 @@ export default function CldUploadAudioWrapper() {
             autoMinimize: true,
           }}
           onSuccess={(result: any) => {
-            console.log(result);
-
             const original_filename = result.info.original_filename;
             const secureUrl = result.info.secure_url;
             const fileSize = result.info.bytes;

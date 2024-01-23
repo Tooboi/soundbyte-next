@@ -18,7 +18,6 @@ async function saveProfile(formData: FormData) {
 
   // - Protect against non logged in user access
   const session = await getServerSession(authOptions);
-  console.log(session);
 
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/upload");
@@ -37,6 +36,7 @@ async function saveProfile(formData: FormData) {
 
   // - Check if the form inputs have changed
   const shouldUpdate = (field: string, value: string | undefined) => {
+    const userValue = (user as any)[field];
     // Check if the value is not undefined and not an empty string
     return (
       value !== undefined &&
@@ -56,6 +56,7 @@ async function saveProfile(formData: FormData) {
         : undefined,
     },
   });
+
   redirect("/manage");
 }
 
