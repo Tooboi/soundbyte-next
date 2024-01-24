@@ -65,10 +65,12 @@ export default async function ManagePage({ params: { id } }: ManagePageProps) {
         <h1 className="text-center text-lg text-stone-400">{userEmail}</h1>
         <Link
           href="/manage/edit"
-          className="group btn-sm btn absolute right-2 top-2 border-stone-500 bg-stone-800 hover:border-stone-400 hover:bg-stone-700"
+          className="group absolute right-2 top-2 grid content-center rounded-md border border-stone-500 bg-stone-800 px-1 py-0.5 transition-all hover:border-stone-400 hover:bg-stone-700"
         >
-          <PencilSquareIcon className="mb-0 h-4 w-4 text-stone-500 group-hover:text-stone-400" />
-          <span className="mt-0.5">Edit</span>
+          <div className="flex flex-row">
+            <PencilSquareIcon className="mb-0 mr-1 h-4 w-4 text-stone-500 group-hover:text-stone-400" />
+            <span className=" mt-0.5 text-xs text-stone-400">Edit</span>
+          </div>
         </Link>
       </div>
     </div>

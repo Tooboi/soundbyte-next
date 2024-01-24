@@ -3,23 +3,13 @@
 import Avatar from "boring-avatars";
 import { Session } from "next-auth";
 import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
 import CldImageWrapper from "../Wrappers/CldImageWrapper";
 import Link from "next/link";
 
 import {
-  RocketLaunchIcon,
-  HomeIcon,
-  GlobeAltIcon,
-  Cog8ToothIcon,
   ArrowRightStartOnRectangleIcon,
-  RectangleStackIcon,
-  WrenchScrewdriverIcon,
   AdjustmentsHorizontalIcon,
-  UserGroupIcon,
   UserIcon,
-  RectangleGroupIcon,
-  PlusIcon,
 } from "@heroicons/react/24/solid";
 
 interface UserMenuButtonProps {
@@ -66,37 +56,37 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
             <li className="">
               <Link
                 href="/manage"
-                className="flex items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group/first"
+                className="flex items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900"
                 role="button"
               >
-                <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover/first:text-byte-500" />
-                <span className="ml-3 flex group-hover/first:text-stone-200">
+                <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                <span className="ml-3 flex group-hover:text-stone-200">
                   Settings
                 </span>
               </Link>
             </li>
-            <li className="group/sec">
+            <li className="">
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition group-active/sec:bg-stone-900 group-hover/sec:bg-stone-700"
+                className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition group-hover:bg-stone-700 group-active:bg-stone-900"
               >
-                <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover/sec:text-byte-500" />
+                <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                <span className="ml-3 flex group-hover/sec:text-stone-200">
+                <span className="ml-3 flex group-hover:text-stone-200">
                   Sign Out
                 </span>
               </button>
             </li>
           </>
         ) : (
-          <li className="group/third">
+          <li className="">
             <button
               onClick={() => signIn()}
-              className="text flex w-full items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group-hover/third:bg-stone-800"
+              className="text flex w-full items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group-hover:bg-stone-800"
             >
-              <UserIcon className="h-6 w-6 text-stone-400 group-hover/third:text-byte-500 " />
+              <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500 " />
 
-              <span className="ml-3 hidden group-hover/third:text-stone-200 md:flex">
+              <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
                 Sign In
               </span>
             </button>

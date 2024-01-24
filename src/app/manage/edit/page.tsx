@@ -1,13 +1,15 @@
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import CldEditImageWrapper from "@/components/Wrappers/CldEditImageWrapper";
-import CldImageWrapper from "@/components/Wrappers/CldImageWrapper";
+import UsernameInputWrapper from "@/components/Wrappers/UsernameInputWrapper";
 import { prisma } from "@/lib/db/prisma";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import Avatar from "boring-avatars";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import React from "react";
+import { isValid } from "zod";
 
 export const metadata = {
   title: "Edit Profile | SoundByte",
@@ -34,6 +36,7 @@ async function ValidateUsername(formData: FormData) {
     // Exclude the current user and find first record with matching username
     where: { username: userName, id: { not: user?.id } },
   });
+
   return existingUser === null;
 }
 
@@ -45,6 +48,9 @@ async function saveProfile(formData: FormData) {
 
   if (!isUsernameValid) {
     console.log("Username is not valid. Aborting save.");
+    const isValid = isUsernameValid;
+    console.log("Username valid: " + isValid);
+
     return; // Do not proceed with the save if the username is not valid
   }
 
@@ -92,7 +98,11 @@ async function saveProfile(formData: FormData) {
   redirect("/manage");
 }
 
-export default async function ManageEditPage() {
+export default async function ManageEditPage({
+  isUsernameValid,
+}: {
+  isUsernameValid: boolean;
+}) {
   // - Protect against non logged in user access
   const session = await getServerSession(authOptions);
 
@@ -106,6 +116,11 @@ export default async function ManageEditPage() {
   const userName = session.user.username || "";
   const name = session.user.name || "";
 
+  // Validate the username
+  // const isUsernameValid = await ValidateUsername({
+  //   username: userName,
+  //   email: userEmail,
+  // });
 
   return (
     <div>
@@ -125,7 +140,7 @@ export default async function ManageEditPage() {
             </div>
           </div>
           <div className="col-span-5 px-2">
-            <label htmlFor="name" className="text-stone-400">
+            <label htmlFor="name" className="pl-2 text-stone-400">
               Name
             </label>
             <input
@@ -134,7 +149,7 @@ export default async function ManageEditPage() {
               placeholder={name}
               className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
             />
-            <label htmlFor="username" className="text-stone-400">
+            <label htmlFor="username" className="pl-2 text-stone-400">
               Username
             </label>
             <input
@@ -143,6 +158,8 @@ export default async function ManageEditPage() {
               placeholder={userName || "Add username"}
               className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
             />
+            {/* <UsernameInputWrapper session={session} isValid={isUsernameValid} /> */}
+            {isUsernameValid && <p>Username unavailable</p>}
           </div>
         </div>
         <div className="flex w-full flex-col justify-between gap-2 xs:flex-row">
@@ -157,6 +174,12 @@ export default async function ManageEditPage() {
           </FormSubmitButton>
         </div>
       </form>
+      <p className="pt-2 text-center text-xs text-stone-600">
+        Some details may take a minute to update in the database
+      </p>
+      <p className="text-center text-xs text-stone-600">
+        Refresh page after saving if you don't see anything
+      </p>
     </div>
   );
 }
