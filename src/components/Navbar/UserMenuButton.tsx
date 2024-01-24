@@ -31,8 +31,8 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
   const email = session?.user.email || null;
 
   return (
-    <div className="dropdown-end dropdown drop-shadow-lg">
-      <div className="group" role="button" tabIndex={0}>
+    <div className="group/userBtn dropdown-end dropdown drop-shadow-lg">
+      <div className="" role="button" tabIndex={0}>
         {profilePic !== null ? (
           <CldImageWrapper
             src={profilePic}
@@ -43,10 +43,10 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
             height={40}
             crop="fill"
             tabIndex={0}
-            className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100"
+            className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover/userBtn:scale-105 group-active/userBtn:scale-100"
           />
         ) : (
-          <div className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover:scale-105 group-active:scale-100">
+          <div className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover/userBtn:scale-105 group-active/userBtn:scale-100">
             <Avatar
               size={40}
               name={email || "soundbyte"}
@@ -58,43 +58,45 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow"
+        role="list"
+        className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow "
       >
         {session ? (
           <>
             <li className="">
               <Link
                 href="/manage"
-                className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
+                className="flex items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group/first"
+                role="button"
               >
-                <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                <span className="ml-3 group-hover:text-stone-200 flex">
+                <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover/first:text-byte-500" />
+                <span className="ml-3 flex group-hover/first:text-stone-200">
                   Settings
                 </span>
               </Link>
             </li>
-            <li className="">
+            <li className="group/sec">
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
+                className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition group-active/sec:bg-stone-900 group-hover/sec:bg-stone-700"
               >
-                <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+                <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover/sec:text-byte-500" />
 
-                <span className="ml-3 group-hover:text-stone-200 flex">
+                <span className="ml-3 flex group-hover/sec:text-stone-200">
                   Sign Out
                 </span>
               </button>
             </li>
           </>
         ) : (
-          <li>
+          <li className="group/third">
             <button
               onClick={() => signIn()}
-              className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900 "
+              className="text flex w-full items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group-hover/third:bg-stone-800"
             >
-              <UserIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500 " />
+              <UserIcon className="h-6 w-6 text-stone-400 group-hover/third:text-byte-500 " />
 
-              <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
+              <span className="ml-3 hidden group-hover/third:text-stone-200 md:flex">
                 Sign In
               </span>
             </button>
