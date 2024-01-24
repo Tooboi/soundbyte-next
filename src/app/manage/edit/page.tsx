@@ -13,18 +13,49 @@ export const metadata = {
   title: "Edit Profile | SoundByte",
 };
 
-async function saveProfile(formData: FormData) {
+async function ValidateUsername(formData: FormData) {
   "use server";
 
   // - Protect against non logged in user access
   const session = await getServerSession(authOptions);
-  console.log(session);
 
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/upload");
   }
 
-  // - Get updated user info from form
+  // - Get updated user info from form and session
+  const userEmail = session.user.email || undefined;
+  const userName = formData.get("username")?.toString();
+  const user = await prisma.user.findUnique({
+    where: { email: userEmail },
+  });
+
+  const existingUser = await prisma.user.findFirst({
+    // Exclude the current user and find first record with matching username
+    where: { username: userName, id: { not: user?.id } },
+  });
+  return existingUser === null;
+}
+
+async function saveProfile(formData: FormData) {
+  "use server";
+
+  // Validate the username
+  const isUsernameValid = await ValidateUsername(formData);
+
+  if (!isUsernameValid) {
+    console.log("Username is not valid. Aborting save.");
+    return; // Do not proceed with the save if the username is not valid
+  }
+
+  // - Protect against non logged in user access
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/upload");
+  }
+
+  // - Get updated user info from form and session
   const userEmail = session.user.email || undefined;
   const profilePic = formData.get("profilePic")?.toString();
   const userName = formData.get("username")?.toString();
@@ -37,6 +68,7 @@ async function saveProfile(formData: FormData) {
 
   // - Check if the form inputs have changed
   const shouldUpdate = (field: string, value: string | undefined) => {
+    const userValue = (user as any)[field];
     // Check if the value is not undefined and not an empty string
     return (
       value !== undefined &&
@@ -56,6 +88,7 @@ async function saveProfile(formData: FormData) {
         : undefined,
     },
   });
+
   redirect("/manage");
 }
 
@@ -72,6 +105,7 @@ export default async function ManageEditPage() {
   const profilePic = session.user.profilePic || "";
   const userName = session.user.username || "";
   const name = session.user.name || "";
+
 
   return (
     <div>

@@ -47,7 +47,6 @@ async function uploadByte(formData: FormData) {
     data: { songName, artist, description, imageFile, audioFile },
   });
   const createdByteId = createdByte.id;
-  // console.log(createdByteId);
 
   // - Update user's bytes array
   await prisma.user.update({

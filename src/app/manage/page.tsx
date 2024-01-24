@@ -30,8 +30,6 @@ export default async function ManagePage({ params: { id } }: ManagePageProps) {
   const profilePic = session.user.profilePic || "";
   const userName = session.user.username || "";
   const name = session.user.name || "";
-  console.log(session.user);
-  
 
   return (
     <div className="w-full transition-all lg:pt-12 xl:pt-24">
@@ -50,10 +48,10 @@ export default async function ManagePage({ params: { id } }: ManagePageProps) {
               width={256}
               height={256}
               crop="fill"
-              className="overflow-hidden rounded-lg"
+              className="overflow-hidden rounded-lg border-2 border-stone-700"
             />
           ) : (
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg border-2 border-stone-700">
               <Avatar
                 size={256}
                 name={userEmail || "soundbyte"}

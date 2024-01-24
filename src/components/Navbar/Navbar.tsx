@@ -23,8 +23,8 @@ export default async function Navbar() {
     <nav className="h-15 fixed top-0 z-50 w-full border-b-2 border-stone-700 bg-stone-900">
       <div className="py-2 md:pl-1 lg:pr-1">
         <div className="flex items-center justify-between">
-          <div className="flex flex-1 justify-start rtl:justify-end">
-            <Link href="/" className="ms-2 flex flex-none md:me-24">
+          <div className="flex justify-start rtl:justify-end">
+            <Link href="/" className="ms-2 flex flex-none">
               <div className="mr-4 h-10 w-full">
                 <LogoOrange />
               </div>
@@ -33,7 +33,7 @@ export default async function Navbar() {
               </h1>
             </Link>
           </div>
-          <form action={searchProducts} className="flex w-full justify-center">
+          <form action={searchProducts} className="flex justify-center">
             <div className="form-control">
               <input
                 name="searchQuery"
@@ -42,7 +42,7 @@ export default async function Navbar() {
               />
             </div>
           </form>
-          <div className=" grid w-14 content-center ">
+          <div className="mr-2 grid w-[40px] h-[40px] content-center">
             <UserMenuButton session={session} />
           </div>
         </div>
