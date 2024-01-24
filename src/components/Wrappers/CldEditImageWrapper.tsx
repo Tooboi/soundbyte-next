@@ -1,10 +1,8 @@
 "use client";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import Avatar from "boring-avatars";
-import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
+import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
-import UserMenuButton from "../Navbar/UserMenuButton";
 import CldImageWrapper from "./CldImageWrapper";
 
 type CldEditImageWrapperProps = {
