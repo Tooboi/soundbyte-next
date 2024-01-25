@@ -60,6 +60,7 @@ model User {
   image         String?
   profilePic    String?
   username      String?
+  createdAt     DateTime  @default(now())
   accounts      Account[]
   sessions      Session[]
   bytes         Byte[]

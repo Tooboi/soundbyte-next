@@ -62,7 +62,7 @@ export default function Aside({ session }: AsideProps) {
               <li className="border-t-2 border-stone-700 pt-6">
                 <Link
                   href="/upload"
-                  className="group inline-flex w-full items-center rounded-lg border-byte-400 bg-transparent px-2 text-center text-byte-300 transition-all hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none xs:border xs:py-[0.35rem]"
+                  className="group inline-flex h-10 w-full items-center rounded-lg border-byte-400 bg-transparent px-2 text-center text-byte-300 transition-all hover:border-byte-500 hover:bg-byte-500 focus:ring-0 active:border-byte-600 active:bg-byte-600 active:outline-none border xs:py-[0.35rem]"
                 >
                   <PlusIcon className="h-6 w-6 text-byte-300 group-hover:text-stone-100 group-active:text-stone-200" />
                   <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
@@ -71,29 +71,6 @@ export default function Aside({ session }: AsideProps) {
                 </Link>
               </li>
               <li className="flex flex-1 "></li>
-              {/* <li className="pb-2">
-                <Link
-                  href="/manage"
-                  className="text group flex items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
-                >
-                  <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
-                    Settings
-                  </span>
-                </Link>
-              </li>
-              <li className="mb-12">
-                <button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  className="text group flex w-full items-center rounded-lg p-2 text-stone-300 transition hover:bg-stone-800 active:bg-stone-900"
-                >
-                  <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-
-                  <span className="ml-3 hidden group-hover:text-stone-200 md:flex">
-                    Sign Out
-                  </span>
-                </button>
-              </li> */}
             </>
           ) : (
             // - logged out

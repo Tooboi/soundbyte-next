@@ -116,12 +116,6 @@ export default async function ManageEditPage({
   const userName = session.user.username || "";
   const name = session.user.name || "";
 
-  // Validate the username
-  // const isUsernameValid = await ValidateUsername({
-  //   username: userName,
-  //   email: userEmail,
-  // });
-
   return (
     <div>
       <form
@@ -156,10 +150,16 @@ export default async function ManageEditPage({
               id="username"
               name="username"
               placeholder={userName || "Add username"}
-              className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+              className="input mb-1 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
             />
+            <p className="pl-2 text-xs text-stone-600">
+              If username is taken you won&#39;t be able to save
+            </p>
+            <p className="pl-2 text-xs text-stone-600">
+              This will be displayed on your bytes
+            </p>
             {/* <UsernameInputWrapper session={session} isValid={isUsernameValid} /> */}
-            {isUsernameValid && <p>Username unavailable</p>}
+            {/* {isUsernameValid && <p>Username unavailable</p>} */}
           </div>
         </div>
         <div className="flex w-full flex-col justify-between gap-2 xs:flex-row">
@@ -178,7 +178,7 @@ export default async function ManageEditPage({
         Some details may take a minute to update in the database
       </p>
       <p className="text-center text-xs text-stone-600">
-        Refresh page after saving if you don't see anything
+        Refresh page after saving if you don&#39;t see anything
       </p>
     </div>
   );

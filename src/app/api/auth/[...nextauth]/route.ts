@@ -41,6 +41,7 @@ export const authOptions: NextAuthOptions = {
       session.user.id = user.id;
       session.user.profilePic = (user as User)?.profilePic || '';
       session.user.username = (user as User)?.username || '';
+      session.user.createdAt = (user as User)?.createdAt || '';
       return session;
     },
   },
@@ -55,7 +56,7 @@ export const authOptions: NextAuthOptions = {
     // signOut: '/signout',
     error: "/error", // Error code passed in query string as ?error=
     verifyRequest: "/auth/verify-request", // (used for check email message)
-    newUser: "/manage/edit", // New users will be directed here on first sign in (leave the property out if not of interest)
+    newUser: "/discover", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
 };
 
