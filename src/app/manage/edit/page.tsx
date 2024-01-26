@@ -1,21 +1,17 @@
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import CldEditImageWrapper from "@/components/Wrappers/CldEditImageWrapper";
-import UsernameInputWrapper from "@/components/Wrappers/UsernameInputWrapper";
 import { prisma } from "@/lib/db/prisma";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import Avatar from "boring-avatars";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
-import { isValid } from "zod";
 
 export const metadata = {
   title: "Edit Profile | SoundByte",
 };
 
-async function ValidateUsername(formData: FormData) {
+async function ValidateUsername(formData: FormData): Promise<boolean> {
   "use server";
 
   // - Protect against non logged in user access
@@ -36,7 +32,7 @@ async function ValidateUsername(formData: FormData) {
     // Exclude the current user and find first record with matching username
     where: { username: userName, id: { not: user?.id } },
   });
-
+// if (existingUser === null) {return}
   return existingUser === null;
 }
 
@@ -46,10 +42,10 @@ async function saveProfile(formData: FormData) {
   // Validate the username
   const isUsernameValid = await ValidateUsername(formData);
 
-  if (!isUsernameValid) {
-    console.log("Username is not valid. Aborting save.");
-    const isValid = isUsernameValid;
-    console.log("Username valid: " + isValid);
+  if (isUsernameValid !== true) {
+    // console.log("Username is not valid. Aborting save.");
+    // const isValid = isUsernameValid;
+    // console.log("Username valid: " + isValid);
 
     return; // Do not proceed with the save if the username is not valid
   }
