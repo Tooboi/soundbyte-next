@@ -19,6 +19,7 @@ interface UserMenuButtonProps {
 export default function UserMenuButton({ session }: UserMenuButtonProps) {
   const profilePic = session?.user.profilePic || null;
   const email = session?.user.email || null;
+  const username = session?.user.username || null;
 
   return (
     <div className="dropdown-end dropdown drop-shadow-lg">
@@ -64,7 +65,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
               </span>
             </Link>
           </li>
-          <li className="group rounded-lg transition-all hover:bg-stone-800 active:bg-stone-900 active:ring-2 active:ring-inset active:ring-stone-700">
+          <li className="group mb-2 rounded-lg transition-all hover:bg-stone-800 active:bg-stone-900 active:ring-2 active:ring-inset active:ring-stone-700">
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition "
@@ -76,6 +77,13 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
               </span>
             </button>
           </li>
+          {username ? (
+            <li className="flex w-full select-none border-t-2 border-stone-700 pb-2 pt-3 text-center text-sm">
+              {username}
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
       ) : (
         <ul

@@ -11,10 +11,10 @@ export default function ByteCard({ byte }: ByteCardProps) {
   return (
     <Link
       href={"/bytes/" + byte.id}
-      className="card w-full bg-base-100 transition-shadow hover:shadow-xl"
+      className="card my-2 w-full bg-stone-800/60 rounded-md transition-shadow hover:shadow-xl"
     >
-      <div className="my-1 flex flex-row gap-2 rounded-md border-2 border-stone-700 p-2">
-        <div className="min-w-[100px] overflow-hidden rounded-md border-2 border-stone-700">
+      <div className="flex flex-row rounded-md border-2 border-stone-700 p-2">
+        <div className="min-w-[100px] overflow-hidden rounded-md border-2 border-stone-700 ">
           <CldImageWrapper
             src={byte.imageFile}
             alt={byte.songName}
@@ -35,7 +35,9 @@ export default function ByteCard({ byte }: ByteCardProps) {
               </div>
               <div>
                 <Link href={"/artist/" + byte.artist}>
-                  <p className="text-xs text-stone-400 hover:text-stone-300">{byte.artist}</p>
+                  <p className="text-xs text-stone-400 hover:text-stone-300">
+                    {byte.artist}
+                  </p>
                 </Link>
 
                 <p className="text-sm text-stone-200">{byte.songName}</p>
