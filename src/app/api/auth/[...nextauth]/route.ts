@@ -39,9 +39,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id;
-      session.user.profilePic = (user as User)?.profilePic || '';
-      session.user.username = (user as User)?.username || '';
-      session.user.createdAt = (user as User)?.createdAt || '';
+      session.user.profilePic = (user as User)?.profilePic || "";
+      session.user.username = (user as User)?.username || "";
+      session.user.createdAt = (user as User)?.createdAt || "";
       return session;
     },
   },

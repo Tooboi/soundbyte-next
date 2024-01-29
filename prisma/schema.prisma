@@ -59,7 +59,7 @@ model User {
   emailVerified DateTime?
   image         String?
   profilePic    String?
-  username      String?
+  username      String?   @unique
   createdAt     DateTime  @default(now())
   accounts      Account[]
   sessions      Session[]
