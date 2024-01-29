@@ -71,7 +71,13 @@ export default function CldUploadAudioWrapper() {
         >
           {({ open }) => {
             return (
-              <button className={buttonClassName} onClick={() => open()}>
+              <button
+                className={buttonClassName}
+                onClick={(e) => {
+                  e.preventDefault();
+                  open();
+                }}
+              >
                 Add Audio
               </button>
             );

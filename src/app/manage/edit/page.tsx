@@ -1,58 +1,20 @@
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import FormSubmitButton from "@/components/FormSubmitButton";
 import CldEditImageWrapper from "@/components/Wrappers/CldEditImageWrapper";
-import UsernameInputWrapper from "@/components/Wrappers/UsernameInputWrapper";
 import { prisma } from "@/lib/db/prisma";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
-import Avatar from "boring-avatars";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
-import { isValid } from "zod";
+import toast from "react-hot-toast";
 
 export const metadata = {
   title: "Edit Profile | SoundByte",
 };
 
-async function ValidateUsername(formData: FormData) {
-  "use server";
-
-  // - Protect against non logged in user access
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/upload");
-  }
-
-  // - Get updated user info from form and session
-  const userEmail = session.user.email || undefined;
-  const userName = formData.get("username")?.toString();
-  const user = await prisma.user.findUnique({
-    where: { email: userEmail },
-  });
-
-  const existingUser = await prisma.user.findFirst({
-    // Exclude the current user and find first record with matching username
-    where: { username: userName, id: { not: user?.id } },
-  });
-
-  return existingUser === null;
-}
-
 async function saveProfile(formData: FormData) {
   "use server";
-
-  // Validate the username
-  const isUsernameValid = await ValidateUsername(formData);
-
-  if (!isUsernameValid) {
-    console.log("Username is not valid. Aborting save.");
-    const isValid = isUsernameValid;
-    console.log("Username valid: " + isValid);
-
-    return; // Do not proceed with the save if the username is not valid
-  }
 
   // - Protect against non logged in user access
   const session = await getServerSession(authOptions);
@@ -83,26 +45,36 @@ async function saveProfile(formData: FormData) {
     );
   };
 
-  // - Update user information in the database
-  const updatedUser = await prisma.user.update({
-    where: { id: user?.id },
-    data: {
-      name: shouldUpdate("name", name) ? name : undefined,
-      username: shouldUpdate("username", userName) ? userName : undefined,
-      profilePic: shouldUpdate("profilePic", profilePic)
-        ? profilePic
-        : undefined,
-    },
-  });
+  try {
+    
+    // - Update user information in the database
+    const updatedUser = await prisma.user.update({
+      where: { id: user?.id },
+      data: {
+        name: shouldUpdate("name", name) ? name : undefined,
+        username: shouldUpdate("username", userName) ? userName : undefined,
+        profilePic: shouldUpdate("profilePic", profilePic)
+          ? profilePic
+          : undefined,
+      },
+    });
 
-  redirect("/manage");
+    redirect("/manage");
+  } catch (error) {
+    // Handle unique constraint violation
+    if (error instanceof PrismaClientKnownRequestError && error.code === 'P2002') {
+      toast.error
+      console.error('Username already exists. Please choose a different username.');
+      // You can redirect the user to an error page or handle it as appropriate
+      // redirect('/error'); 
+    } else {
+      // Rethrow other errors
+      throw error;
+    }
+  }
 }
 
-export default async function ManageEditPage({
-  isUsernameValid,
-}: {
-  isUsernameValid: boolean;
-}) {
+export default async function ManageEditPage() {
   // - Protect against non logged in user access
   const session = await getServerSession(authOptions);
 
@@ -115,12 +87,7 @@ export default async function ManageEditPage({
   const profilePic = session.user.profilePic || "";
   const userName = session.user.username || "";
   const name = session.user.name || "";
-
-  // Validate the username
-  // const isUsernameValid = await ValidateUsername({
-  //   username: userName,
-  //   email: userEmail,
-  // });
+  // const result = await saveProfile(formData);
 
   return (
     <div>
@@ -156,10 +123,14 @@ export default async function ManageEditPage({
               id="username"
               name="username"
               placeholder={userName || "Add username"}
-              className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+              className="input mb-1 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
             />
-            {/* <UsernameInputWrapper session={session} isValid={isUsernameValid} /> */}
-            {isUsernameValid && <p>Username unavailable</p>}
+            <p className="pl-2 text-xs text-stone-600">
+              If username is taken you won&#39;t be able to save
+            </p>
+            <p className="pl-2 text-xs text-stone-600">
+              This will be displayed on your bytes
+            </p>
           </div>
         </div>
         <div className="flex w-full flex-col justify-between gap-2 xs:flex-row">
@@ -178,7 +149,7 @@ export default async function ManageEditPage({
         Some details may take a minute to update in the database
       </p>
       <p className="text-center text-xs text-stone-600">
-        Refresh page after saving if you don't see anything
+        Refresh page after saving if you don&#39;t see anything
       </p>
     </div>
   );

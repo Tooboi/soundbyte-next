@@ -6,6 +6,7 @@ declare module "next-auth" {
       id: string;
       profilePic: string;
       username: string;
+      createdAt: Date;
     } & DefaultSession["user"];
   }
 }

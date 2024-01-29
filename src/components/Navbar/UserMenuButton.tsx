@@ -21,7 +21,7 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
   const email = session?.user.email || null;
 
   return (
-    <div className="group/userBtn dropdown-end dropdown drop-shadow-lg">
+    <div className="dropdown-end dropdown drop-shadow-lg">
       <div className="" role="button" tabIndex={0}>
         {profilePic !== null ? (
           <CldImageWrapper
@@ -33,10 +33,10 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
             height={40}
             crop="fill"
             tabIndex={0}
-            className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover/userBtn:scale-105 group-active/userBtn:scale-100"
+            className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform hover:scale-105 active:scale-100"
           />
         ) : (
-          <div className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform group-hover/userBtn:scale-105 group-active/userBtn:scale-100">
+          <div className="h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-stone-700 transition-transform hover:scale-105 active:scale-100">
             <Avatar
               size={40}
               name={email || "soundbyte"}
@@ -46,40 +46,44 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
           </div>
         )}
       </div>
-      <ul
-        tabIndex={0}
-        role="list"
-        className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow "
-      >
-        {session ? (
-          <>
-            <li className="">
-              <Link
-                href="/manage"
-                className="flex items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900"
-                role="button"
-              >
-                <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
-                <span className="ml-3 flex group-hover:text-stone-200">
-                  Settings
-                </span>
-              </Link>
-            </li>
-            <li className="">
-              <button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition group-hover:bg-stone-700 group-active:bg-stone-900"
-              >
-                <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+      {session ? (
+        <ul
+          tabIndex={0}
+          role="list"
+          className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow "
+        >
+          <li className="group rounded-lg transition-all hover:bg-stone-800 active:bg-stone-900 active:ring-2 active:ring-inset active:ring-stone-700">
+            <Link
+              href="/manage"
+              className="z-30 flex items-center rounded-lg p-2 text-stone-300 transition group-hover:bg-stone-800 group-active:bg-stone-900"
+              role="button"
+            >
+              <AdjustmentsHorizontalIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
+              <span className="ml-3 flex group-hover:text-stone-200">
+                Manage
+              </span>
+            </Link>
+          </li>
+          <li className="group rounded-lg transition-all hover:bg-stone-800 active:bg-stone-900 active:ring-2 active:ring-inset active:ring-stone-700">
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="text  flex w-full items-center rounded-lg p-2 text-stone-300 transition "
+            >
+              <ArrowRightStartOnRectangleIcon className="h-6 w-6 text-stone-400 group-hover:text-byte-500" />
 
-                <span className="ml-3 flex group-hover:text-stone-200">
-                  Sign Out
-                </span>
-              </button>
-            </li>
-          </>
-        ) : (
-          <li className="">
+              <span className="ml-3 flex group-hover:text-stone-200">
+                Sign Out
+              </span>
+            </button>
+          </li>
+        </ul>
+      ) : (
+        <ul
+          tabIndex={0}
+          role="list"
+          className="dropdown-content menu menu-sm z-30 mt-2 w-52 rounded-b-lg border-2 border-stone-700 bg-stone-900 p-2 shadow "
+        >
+          <li className="group rounded-lg transition-all hover:bg-stone-800 active:bg-stone-900 active:ring-2 active:ring-inset active:ring-stone-700">
             <button
               onClick={() => signIn()}
               className="text flex w-full items-center rounded-lg p-2 text-stone-300 transition active:bg-stone-900 group-hover:bg-stone-800"
@@ -91,8 +95,8 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
               </span>
             </button>
           </li>
-        )}
-      </ul>
+        </ul>
+      )}
     </div>
   );
 }

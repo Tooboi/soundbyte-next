@@ -6,6 +6,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
 import CldUploadImageWrapper from "@/components/Wrappers/CldUploadImageWrapper";
 import CldUploadAudioWrapper from "@/components/Wrappers/CldUploadAudioWrapper";
+import Link from "next/link";
 
 export const metadata = {
   title: "Upload | SoundByte",
@@ -63,13 +64,33 @@ export default async function Upload() {
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/upload");
   }
+  if (session.user?.username == "") {
+    return (
+      <div className="w-full transition-all lg:pt-12 pt-24 flex flex-col">
+        <h1 className="pb-6 text-center text-xl">
+          You need a username to upload a byte
+        </h1>
+        <Link
+          href={"/manage/edit"}
+          className="btn mx-auto rounded-lg border-2 border-byte-700 bg-byte-600 text-byte-200 hover:border-byte-400 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 active:text-byte-400"
+        >
+          Add Username
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-full xl:pt-24 lg:pt-12 transition-all">
-      <form action={uploadByte} className="max-w-[856px] mx-auto border-2 border-stone-700 rounded-lg p-6 bg-stone-900">
-      {/* <h1 className="text-center w-full mb-4 text-xl font-medium text-stone-400">Upload New Byte</h1> */}
+    <div className="w-full transition-all lg:pt-12 xl:pt-24">
+      <form
+        action={uploadByte}
+        className="mx-auto max-w-[856px] rounded-lg border-2 border-stone-700 bg-stone-900 px-6 pb-6 pt-4"
+      >
+        <h1 className="mb-4 w-full text-center text-2xl font-normal text-stone-400">
+          New Byte
+        </h1>
         <div>
-          <div className="flex flex-col pb-4 xs:grid xs:grid-cols-8">
+          <div className="flex flex-col pb-6 xs:grid xs:grid-cols-8">
             <div className="col-span-3 px-2 pb-4 xs:pb-0 ">
               <div className="rounded-lg border-2 border-stone-700 bg-stone-950/50">
                 <div className="p-2">
@@ -87,8 +108,9 @@ export default async function Upload() {
               <input
                 required
                 name="artist"
-                placeholder="Artist TEMP"
-                className="input mb-3 w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+                placeholder={`${session.user?.username || "TEMP"}`}
+                className="input mb-3 hidden w-full rounded-lg border-2 border-byte-600 bg-stone-950/50 backdrop-blur-sm placeholder:text-stone-600 focus:border-byte-600 focus:ring-2 focus:ring-stone-600 focus:ring-offset-2 focus:ring-offset-stone-950"
+                value={session.user?.username}
               />
               <textarea
                 required
@@ -102,7 +124,9 @@ export default async function Upload() {
             </div>
           </div>
 
-          <FormSubmitButton className="text-byte-200 w-full btn rounded-lg border-2 border-byte-700 bg-byte-600 hover:border-byte-400 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 active:text-byte-400">Upload</FormSubmitButton>
+          <FormSubmitButton className="btn w-full rounded-lg border-2 border-byte-700 bg-byte-600 text-byte-200 hover:border-byte-400 hover:bg-byte-700 active:border-byte-800 active:bg-byte-950 active:text-byte-400">
+            Upload
+          </FormSubmitButton>
         </div>
       </form>
     </div>

@@ -7,6 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Navbar from "@/components/Navbar/Navbar";
 import Aside from "@/components/Navbar/Aside";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -29,7 +30,10 @@ export default async function RootLayout({
             <Navbar />
             <Aside session={session} />
             <div className="ml-12 p-4 transition-all xs:ml-16 md:ml-56">
-              <div className="mt-14 min-h-screen rounded-lg">{children}</div>
+              <div className="mt-14 min-h-screen rounded-lg">
+                {children}
+                <Toaster position="bottom-right" />
+              </div>
               <Footer />
             </div>
           </main>
